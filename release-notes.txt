@@ -3,7 +3,7 @@ Version 0.1.0
 
 #----------------------------------------Release Notes----------------------------------------#
 
-Version 0.2.0 (9/10/21)
+Version 0.2.0 (9/16/21)
 New Features:
 	- "I'm feeling lucky"
 		- Given a folder, a random image is chosen from that folder
@@ -13,15 +13,22 @@ New Features:
 		- Drag and release to draw a line from point A to point B
 	- Save and Save As
 		- Lets you save your masterpieces
-	
+	- Tab
+		- Currently only one can be opened but in the future more tabs can be
+		  added
+	- Paint Tools
+		- Sits right under the Menu Bar; all of the tools you'll need to paint things
 
 Features in-progress:
 	- Random color
-		- Gives the user a random color from the click of a button
-	
+		- Gives the user a random color at the click of a button
+	- Rainbow Fun Mode
+	- More Tabs
 
 Bugs:
-	
+	- Closing the tab is not good and requires a reboot
+
+#---------------------------------------------------------------------------------------------#
 
 Version 0.1.0 (9/10/21)
 New Features:

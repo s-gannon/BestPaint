@@ -24,12 +24,13 @@ public class BetterPopups { //really just a container for the popups
     /**
      * Creates a window that takes text from a file and displays it in a
      * nice window
-     * @param path The path where the text can be found
-     * @param title The title that the window should take
+     * @param path The path where the text that will be displayed can be found
+     * @param title The title that the window should take on
      * @throws FileNotFoundException 
      */
     public static void createTextWindow(File path, String title) throws FileNotFoundException{
         Stage wind = new Stage();           //generic window to hold text
+        wind.initOwner(BetterPaint.mainStage);
         BorderPane bp = new BorderPane();   //BorderPane to paste button to bottom
         ScrollPane textScroll = new ScrollPane();   //ScrollPane to scroll the text if needed
         HBox bottomBox = new HBox();        //literally only for the okay button
@@ -62,6 +63,7 @@ public class BetterPopups { //really just a container for the popups
      */
     public static void createExitWindow(){
         Stage exitWindow = new Stage();
+        exitWindow.initOwner(BetterPaint.mainStage);
         GridPane gp = new GridPane();
         Scene sureScene = new Scene(gp, 400, 200);
 
@@ -89,7 +91,7 @@ public class BetterPopups { //really just a container for the popups
             System.exit(0);     //I heard this was good for closing threads?
         });
         noBtn.setOnAction((ActionEvent f) -> {
-            exitWindow.hide();  //Hide it if
+            exitWindow.hide();  //Hide this window if they're not done yet
         });
     } 
 }

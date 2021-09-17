@@ -22,7 +22,7 @@ import javafx.stage.FileChooser;
  *
  * @author spencer
  */
-public class CleanerMenuBar extends MenuBar{
+public class CleanerMenuBar extends MenuBar{    //it can't be better without some theft
     public CleanerMenuBar(){
         super();
         Random rand = new Random();
@@ -33,16 +33,15 @@ public class CleanerMenuBar extends MenuBar{
                 new FileChooser.ExtensionFilter("JPEG (stupid lossy)", "*.jpg"),
                 new FileChooser.ExtensionFilter("Bitmap", "*.bmp"),
                 new FileChooser.ExtensionFilter("Graphics Interchange Format", "*.gif"),
-                new FileChooser.ExtensionFilter("Raw Image", "*.raw")
-        );      //all the filters that myself and Image support
+                new FileChooser.ExtensionFilter("Raw Image", "*.raw")); //all of the extensions I "support"
         
         Menu fileOption = new Menu("File");
         MenuItem[] fileSubOptions = {new MenuItem("Open..."), new MenuItem("I'm feeling lucky"),
                                      new MenuItem("Save file"), new MenuItem("Save file as..."),
-                                     new MenuItem("Exit")};
+                                     new MenuItem("Exit")}; //All of my file suboptions
         
         Menu optionsOption = new Menu("Options");
-        MenuItem[] optionsSubOptions = {};
+        MenuItem[] optionsSubOptions = {};  //really just a placeholder for when I need it
         
         Menu helpOption = new Menu("Help");
         MenuItem[] helpSubOptions = {new MenuItem("About"), new MenuItem("Help"), 
@@ -56,16 +55,15 @@ public class CleanerMenuBar extends MenuBar{
         for(MenuItem i : fileSubOptions)
             fileOption.getItems().add(i);   //adds all of the sub-options to the File option using the best for loop
         for(MenuItem i : optionsSubOptions)
-            optionsOption.getItems().add(i);
+            optionsOption.getItems().add(i);//adds all of the sub-options to the Options option using the best for loop
         for(MenuItem i : helpSubOptions)
-            helpOption.getItems().add(i);
+            helpOption.getItems().add(i);   //adds all of the sub-options to the Help option using the best for loop
         
-        fileSubOptions[0].setOnAction((ActionEvent e) -> {    //open file
+        fileSubOptions[0].setOnAction((ActionEvent e) -> {      //"Open file"
             BetterPaint.canvas.setPath(chooseFile.showOpenDialog(BetterPaint.mainStage));
             BetterPaint.canvas.drawImage();
         });
-        fileSubOptions[1].setOnAction((ActionEvent e) -> {    //random file / I'm feeling lucky
-            int attempts = 0;   //failsafe; after a number of attempts we will end the random
+        fileSubOptions[1].setOnAction((ActionEvent e) -> {      //"I'm feeling lucky"
             File dir = chooseDir.showDialog(BetterPaint.mainStage);
             FileFilter imFilter = new FileFilter(){
                 String[] extensions = {".jpg", ".png", ".raw", ".gif", ".bmp"}; //I've heard this is bad, but oh well
@@ -75,22 +73,22 @@ public class CleanerMenuBar extends MenuBar{
                             return true;
                     return false;
                 }
-            };  //filters out images from non-images
-            File[] subFiles = dir.listFiles(imFilter);
-            try {
-                BetterPaint.canvas.setPath(subFiles[rand.nextInt(subFiles.length)]);
-                BetterPaint.canvas.drawImage();
-            } catch (Exception f) {
-                //I'll figure it out later; probably put a whoopsie printout here
+            };  //filters out images from non-images (should probably use filter up top)
+            File[] subFiles = dir.listFiles(imFilter);             //list of files in the folder
+            try {   
+                BetterPaint.canvas.setPath(subFiles[rand.nextInt(subFiles.length)]);    //sets new path to the random file
+                BetterPaint.canvas.drawImage();     //draws random image
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
         });
         
         fileSubOptions[2].setOnAction((ActionEvent e) -> 
-                BetterPaint.canvas.saveImage());
+                BetterPaint.canvas.saveImage());    //saves image to the current path
         fileSubOptions[3].setOnAction((ActionEvent e) -> 
-                BetterPaint.canvas.saveImageAs(chooseFile.showSaveDialog(BetterPaint.mainStage)));
+                BetterPaint.canvas.saveImageAs(chooseFile.showSaveDialog(BetterPaint.mainStage)));  //saves image to new path
         fileSubOptions[fileSubOptions.length - 1].setOnAction((ActionEvent e) -> 
-                BetterPopups.createExitWindow()); //exit
+                BetterPopups.createExitWindow());   //good/safe exit
         
         helpSubOptions[0].setOnAction((ActionEvent e) -> {  //about window
             try {

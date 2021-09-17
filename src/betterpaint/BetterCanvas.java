@@ -9,27 +9,51 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javax.imageio.ImageIO;
 
 public class BetterCanvas extends Canvas{
     private static File path;   //the path that the canvas will save images to
     private GraphicsContext gc; //the GraphicsContext (how things are drawn)
-    private Group grp;
+    private Line line = null;
     //Constructors
     public BetterCanvas(){
         super();
         gc = getGraphicsContext2D();
-        grp = new Group();
         path = null;
         
         this.setOnMousePressed(e -> {
+            switch(CleanerCanvasTools.getCurrentTool()){
+                case("Line"):
+                    line = new Line(e.getX(), e.getY(), e.getX(), e.getY());
+                case("Freehand"):
+                    //todo; the freehand code
+            }
             
         });
         this.setOnMouseDragged(e -> {
-        
+            switch(CleanerCanvasTools.getCurrentTool()){
+                case("Line"):
+                    line.setEndX(e.getX());
+                    line.setEndY(e.getY());
+                case("Freehand"):
+                    //todo; the freehand code
+            } 
         });
         this.setOnMouseReleased(e -> {
-            
+            switch(CleanerCanvasTools.getCurrentTool()){
+                case("Line"):
+                    line.setEndX(e.getX());
+                    line.setEndY(e.getY());
+                    gc.setLineWidth(CleanerCanvasTools.getLineWidth());
+                    gc.setStroke(CleanerCanvasTools.getColor());
+                    gc.setLineCap(StrokeLineCap.ROUND);
+                    gc.strokeLine(line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
+                    line = null;
+                case("Freehand"):
+                    //todo; the freehand code
+            }
         });
     }
     /**
