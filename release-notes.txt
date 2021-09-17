@@ -24,6 +24,7 @@ Features in-progress:
 		- Gives the user a random color at the click of a button
 	- Rainbow Fun Mode
 	- More Tabs
+	- "Don't show me the release notes again" checkbox
 
 Bugs:
 	- Closing the tab is not good and requires a reboot

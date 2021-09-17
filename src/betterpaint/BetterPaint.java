@@ -27,7 +27,8 @@ public class BetterPaint extends Application {
         "Orginization, shmorginization",
         "I do a little bit of trolling from time to time", 
         "DeGoode pain in my ass",
-        "Down with JES & Jython"};
+        "Down with JES & Jython",
+        "Hilarious"};
     private final Random rand = new Random();
     
     public final static String REL_NOTES_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BetterPaint\\release-notes.txt";

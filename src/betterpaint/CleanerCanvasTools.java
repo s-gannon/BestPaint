@@ -20,7 +20,7 @@ public class CleanerCanvasTools extends ToolBar{
     private int[] lineWidthValues = {1,2,5,10,15,20,25,50}; //some standard line width values
     
     public final static String[] DRAW_TOOLS = {
-        "None", "Line", "Freehand"};
+        "None", "Line", };
     
     public CleanerCanvasTools(){
         super();
