@@ -6,6 +6,9 @@
 	- Save file: 	     saves the changes to the currently opened file
 	- Save file as:      saves the currently opened file to the specified file path
 	- Exit:		     safely exits the program
+ - Options: has customizable options or options to change different things
+	- Zoom in:	     zooms the canvas in
+	- Zoom out:	     zooms the canvas out
  - Help: has all of the information and assistance options
 	- About: 	     has the version and author information as well as a short descr.
 	- Help:		     opens a tab that offers descriptions on each option

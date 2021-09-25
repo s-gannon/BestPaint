@@ -1,11 +1,45 @@
 BetterPaint
-Version 0.2.1
+Version 0.3.0
 
 #----------------------------------------Release Notes----------------------------------------#
 
+Version 0.3.0 (9/24/21)
+New Features:
+	- New drawing tools!
+		- Freehand/"Pencil" - go crazy and draw everywhere
+		- Ellipse (with possible fill)
+		- Rectangles (with possible fill)
+			- Width on shapes changes when you change 'Line Width'
+		- Square (with possible fill)
+		- Circle (with possible fill)
+		- Text in any color you desire
+		- Color Dropper! See a color you like? Click it!
+	- Random Color!
+		- Don't know what color you want? Hit 'Random Color' until one
+		  catches your eye!
+	- Keyboard commands
+		- Alt+F/Alt+O/Alt+H opens all of the menu bar options
+		- Alt+S and Ctrl+S saves!
+		- Ctrl+[ zooms out and Ctrl+] zooms in
+	- New menu bar option
+		-Zoom in and zoom out now available!
+	- Text label
+		- Now you can see what color you're using
+Features in-progress:
+	- Rainbow Fun Mode
+	- "Don't show me the release notes again" checkbox
+	- "Options"
+Bugs:
+	- Clicking the red X will not prompt a warning for unsaved tabs - fix 
+	  in-progress
+	
+
+#---------------------------------------------------------------------------------------------#
+
 Version 0.2.1 (9/17/21)
 Notes:
-	- Removed Freehand as a drawing option
+	- Removed Freehand as a drawing option for now due to the fact that it does 
+	  not work
 
 #---------------------------------------------------------------------------------------------#
 
@@ -23,7 +57,8 @@ New Features:
 		- Currently only one can be opened but in the future more tabs can be
 		  added
 	- Paint Tools
-		- Sits right under the Menu Bar; all of the tools you'll need to paint things
+		- Sits right under the Menu Bar; all of the tools you'll need to paint 
+		  things
 
 Features in-progress:
 	- Random color
@@ -43,8 +78,8 @@ New Features:
 		- Only two options, "Files" and "Release"
 	- Open most (if not all) image files
 	- Safe exit
-		- We'll ask if you're sure about exiting so that you don't exit if you didn't
-		  *really* want to
+		- We'll ask if you're sure about exiting so that you don't exit if you 
+		  didn't *really* want to
 
 Features in-progress:
 	- "I'm feeling lucky"
