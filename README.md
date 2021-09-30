@@ -1,4 +1,4 @@
-# BetterPaint
-CS-250 Paint Project ; A better paint program
+# BestPaint
+CS-250 Paint Project ; The best paint program
 
 Uses JDK 1.8 (which includes the JavaFX library)
