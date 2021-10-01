@@ -1,9 +1,0 @@
-#----------------------------------------------About----------------------------------------------#
-Name:    BetterPaint
-Version: 0.3.0
-Author:  Spencer Gannon
-
-Description: BetterPaint is a Java-based interpretation on Microsoft Paint and intends to
-emulate and improve apon Microsoft Paint's features and abilities.
-
-#-------------------------------------------------------------------------------------------------#
