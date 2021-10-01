@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="BetterPaint.jnlp">
+  <information>
+    <title>BetterPaint</title>
+    <vendor>spencer</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="BetterPaint.jar" size="20757" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="betterpaint.BetterPaint"  name="BetterPaint" />
+  <update check="always"/>
+</jnlp>
