@@ -1,7 +1,40 @@
 BetterPaint
-Version 0.3.0
+Version 1.1.0
 
 #----------------------------------------Release Notes----------------------------------------#
+
+Version 1.1.0 (9/31/21)
+New Features:
+	- RAINBOW FUN MODE
+		- Many colors on the canvas
+	- Rosasco Mode
+		- Bwaha haha ha
+	- Dog Ate Homework Button
+		- Saves the file but crashes the program
+Features in progress:
+	- Infinite Rosasco Mode
+
+#---------------------------------------------------------------------------------------------#
+
+Version 1.0.0 (9/30/21)
+New Features:
+	- Rename
+		- It's now BestPaint
+	- Live Draw
+		- See everything draw right before your eyes
+	- New drawing tools!
+		- N-gon - an n sided polygon!
+	- Undo and Redo
+		-Ctrl-Z and Ctrl-A respectively
+	- Cut and Paste
+		- Use one to cut a section, another to paste what's in the clipboard
+	- Blank starter image
+	- New file
+		- Opens previously mentioned blank starter image
+Features in progress:
+	- Infinite Rosasco Mode
+
+#---------------------------------------------------------------------------------------------#
 
 Version 0.3.0 (9/24/21)
 New Features:
@@ -9,7 +42,8 @@ New Features:
 		- Freehand/"Pencil" - go crazy and draw everywhere
 		- Ellipse (with possible fill)
 		- Rectangles (with possible fill)
-			- Width on shapes changes when you change 'Line Width'
+			- Width on all shapes changes when you change 'Line Width'
+		- Rounded rectangle (with possible fill)
 		- Square (with possible fill)
 		- Circle (with possible fill)
 		- Text in any color you desire
