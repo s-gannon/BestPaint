@@ -1,11 +1,14 @@
 #-----------------------------------------------Help----------------------------------------------#
 
  - File: has all of the file operations you can perform such as saving and opening files
-	- Open file: 	     opens an image file (restricted to 5 or so image file types)
+	- New file: 	     opens a blank file
+	- Open file: 	     opens an image file (restricted to 3 or so image file types)
 	- I'm feeling lucky: opens a random image file from a given folder/directory
 	- Save file: 	     saves the changes to the currently opened file
 	- Save file as:      saves the currently opened file to the specified file path
 	- Exit:		     safely exits the program
+	- Undo:		     undoes the last change
+	- Redo: 	     redoes the last change
  - Options: has customizable options or options to change different things
 	- Zoom in:	     zooms the canvas in
 	- Zoom out:	     zooms the canvas out

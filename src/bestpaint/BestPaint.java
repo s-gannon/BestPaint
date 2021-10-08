@@ -1,5 +1,6 @@
 package bestpaint;
 
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
@@ -7,22 +8,26 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 /**
  * @author Spencer Gannon
- * @version 1.0.0
+ * @version 1.2.0
  */
 public class BestPaint extends Application {
+    public final static String IMAGE_FOLDER = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\images\\";
+
     private final static String TITLE = "BestPaint";
-    private final static String VER_NUM = "1.1.0";
+    private final static String VER_NUM = "1.2.0";
     private final static String SUBTITLE = "Because one refactor just wasn't enough";
     private final static int WINDOW_LENGTH = 1700;
     private final static int WINDOW_HEIGHT = 1000;
+    
+    public static int autosaveInterval;
     //major window elements made public and static to access outside of main
     public static Stage mainStage;
     public static TabPane tabpane;
     public static CToolBar toolbar;
     public static CMenuBar menubar;
+    public static Timeline autosave;
     
     @Override
     public void start(Stage primeStage) {

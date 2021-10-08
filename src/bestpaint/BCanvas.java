@@ -37,33 +37,55 @@ public class BCanvas extends DCanvas{
             this.setLineWidth(CToolBar.getLineWidth());
             this.setFillShape(CToolBar.getFillStatus());
             switch(CToolBar.getCurrentTool()){
+                case("Eraser"):
+                    this.setLineColor(Color.WHITE);
+                    break;
                 case("Line"):
                     this.drawLine(x, y, x, y);
+                    this.updateStacks();
                     break;
                 case("Rectangle"):
                     this.drawRect(x,y,x,y);
+                    this.updateStacks();
                     break;
                 case("Round Rectangle"):
                     this.drawRoundRect(x,y,x,y);
+                    this.updateStacks();
                     break;
                 case("Square"):
                     this.drawSquare(x, y, x, y);
+                    this.updateStacks();
                     break;
                 case("Ellipse"):
                     this.drawEllipse(x,y,x,y);
+                    this.updateStacks();
                     break;
                 case("Circle"):
                     this.drawNgon(x, y, x, y, 314);
+                    this.updateStacks();
                     break;
                 case("N-gon"):
                     this.drawNgon(x, y, x, y, 5);
+                    this.updateStacks();
                     break;
                 case("Cut"):
+                    this.setLineWidth(1);
+                    this.setFillShape(true);
+                    this.setLineColor(this.getFillColor());
+                    this.drawRect(x,y,x,y);
+                    this.updateStacks();
                     break;
                 case("Paste"):
+                    try{
+                        this.drawImageAt(clipboard, e.getX(), e.getY());
+                    }catch(Exception f){
+                        System.out.println(e);
+                    }
+                    this.updateStacks();
                     break;
                 case("Text"):
                     this.drawText("Sample Text", e.getX(), e.getY());
+                    this.updateStacks();
                     break;
                 case("Dropper"):
                     CToolBar.setFillColor(this.getColorAtPixel(x,y));
@@ -83,7 +105,6 @@ public class BCanvas extends DCanvas{
                     CToolBar.setLineColor(this.getColorAtPixel(e.getX(),e.getY()));
                     break;
                 case("Eraser"):
-                    this.setLineColor(Color.WHITE);
                     this.drawLine(x, y, e.getX(), e.getY());
                     x = e.getX();
                     y = e.getY();
@@ -91,49 +112,56 @@ public class BCanvas extends DCanvas{
                 case("Text"):
                     this.undo();
                     this.drawText("Sample Text", e.getX(), e.getY());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("Line"):
                     this.undo();
                     this.drawLine(x, y, e.getX(), e.getY());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("Rectangle"):
                     this.undo();
                     this.drawRect(x, y, e.getX(), e.getY());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("Round Rectangle"):
                     this.undo();
                     this.drawRoundRect(x,y,e.getX(),e.getY());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("Square"):
                     this.undo();
                     this.drawSquare(x, y, e.getX(), e.getY());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("Ellipse"):
                     this.undo();
                     this.drawEllipse(x,y,e.getX(),e.getY());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("Circle"):
                     this.undo();
                     this.drawNgon(x, y, e.getX(), e.getY(), 314);
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("N-gon"):
                     this.undo();
                     this.drawNgon(x, y, e.getX(), e.getY(), CToolBar.getNumSides());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    this.updateStacks();
                     break;
                 case("Cut"):
+                    this.undo();
+                    this.drawRect(x, y, e.getX(), e.getY());
+                    this.updateStacks();
                     break;
                 case("Paste"):
                     this.undo();
-                    this.drawImageAt(clipboard, e.getX(), e.getY());
-                    this.updateStacks(this.getRegion(0,0,this.getWidth(),this.getHeight()));
+                    try{
+                        this.drawImageAt(clipboard, e.getX(), e.getY());
+                    }catch(Exception f){
+                        System.out.println(e);
+                    }
+                    this.updateStacks();
                     break;
             }
         });
@@ -144,39 +172,46 @@ public class BCanvas extends DCanvas{
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Eraser"):
-                    this.setLineColor(Color.WHITE);
                     this.drawLine(x, y, e.getX(), e.getY());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Line"):
+                    this.undo();
                     this.drawLine(x, y, e.getX(), e.getY());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Rectangle"):
+                    this.undo();
                     this.drawRect(x, y, e.getX(), e.getY());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Round Rectangle"):
+                    this.undo();
                     this.drawRoundRect(x,y,e.getX(),e.getY());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Square"):
+                    this.undo();
                     this.drawSquare(x, y, e.getX(), e.getY());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Ellipse"):
+                    this.undo();
                     this.drawEllipse(x, y, e.getX(), e.getY());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Circle"):
+                    this.undo();
                     this.drawNgon(x, y, e.getX(), e.getY(), 314);
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("N-gon"):
+                    this.undo();
                     this.drawNgon(x, y, e.getX(), e.getY(), CToolBar.getNumSides());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Text"):
+                    this.undo();
                     this.drawText("Sample Text", e.getX(), e.getY());
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
@@ -185,17 +220,14 @@ public class BCanvas extends DCanvas{
                     CToolBar.setLineColor(this.getColorAtPixel(e.getX(),e.getY()));
                     break;
                 case("Cut"):
+                    this.undo();
                     this.clipboard = this.getRegion(x, y, e.getX(), e.getY());
-                    //draws white rectangle where we cut
-                    this.setFillShape(true);
-                    this.setLineWidth(1);
-                    this.setFillColor(Color.WHITE);
-                    this.setLineColor(Color.WHITE);
                     this.drawRect(x, y, e.getX(), e.getY());
-                    this.updateStacks(this.getRegion(0,0, this.getWidth(), this.getHeight()));
+                    this.updateStacks();
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;
                 case("Paste"):
+                    this.undo();
                     if(this.clipboard != null){
                         this.drawImageAt(this.clipboard, e.getX(), e.getY());
                     }
@@ -203,13 +235,9 @@ public class BCanvas extends DCanvas{
                     break;
             }
             BestPaint.getCurrentTab().updateTabTitle();
-            this.updateStacks(this.getRegion(0,0, this.getWidth(), this.getHeight()));
+            this.updateStacks();
             x = y = 0;  //resets the x and y coordinates at the end to be safe
         });
-    }
-    public void updateStacks(Image im){
-        undoStack.push(im); 
-        redoStack.clear();  //clear redo every time to avoid problems with breaking time
     }
     /**
      * Undoes the previous change to the image and draws to canvas
@@ -234,5 +262,12 @@ public class BCanvas extends DCanvas{
             undoStack.push(im);
             this.drawImage(im);
         }   
+    }
+    /**
+     * Updates the stacks
+     */
+    public void updateStacks(){
+        undoStack.push(this.getRegion(0,0, this.getWidth(), this.getHeight())); 
+        redoStack.clear();  //clear redo every time to avoid problems with breaking time
     }
 }

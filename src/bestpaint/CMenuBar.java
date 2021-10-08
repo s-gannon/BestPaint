@@ -16,6 +16,7 @@ public class CMenuBar extends MenuBar{
     public final static String REL_NOTES_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\release-notes.txt";
     public final static String ABOUT_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\about.txt";
     public final static String HELP_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\help.txt";
+    public final static String CONFIG_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\config.txt";
     
     public CMenuBar(){
         super();
@@ -77,6 +78,13 @@ public class CMenuBar extends MenuBar{
                 BestPaint.getCurrentTab().saveImageAs();
             else
                 BestPaint.getCurrentTab().saveImage();
+        });
+        fileOptions[4].setOnAction((ActionEvent e) -> { //saves image as
+            try{
+                BestPaint.getCurrentTab().saveImageAs();
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
         });
         fileOptions[5].setOnAction((ActionEvent e) -> { //undo
             BestPaint.getCurrentTab().undo();

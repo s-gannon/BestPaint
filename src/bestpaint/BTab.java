@@ -1,14 +1,24 @@
 package bestpaint;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -16,15 +26,23 @@ import javax.imageio.ImageIO;
 
 public class BTab extends Tab{
     public Pane canvasPane;   //static
-    private static FileChooser chooseFile;  
+    public final static String AUTOSAVE_DIR = "C:\\Users\\spencer\\AppData\\Local\\bestpaint\\";
     
+    
+    private final static int MILS_IN_SECS = 1000;
+    private static FileChooser chooseFile;
+    
+    private int autosaveSecs;
     private double scale;
     private boolean unsavedChanges;
     private File path;
     private String title;
     private BCanvas canvas;
+    private Image autosaveBackup;
     private ScrollPane scroll;
     private StackPane canvasStack;
+    private Timer autosaveTimer;
+    private TimerTask autosave;
     
     public BTab(){
         super();
@@ -47,6 +65,9 @@ public class BTab extends Tab{
      */
     private void setup(){
         this.scale = 1;
+        
+        this.autosaveBackup = null;
+        
         chooseFile = new FileChooser();
         chooseFile.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("PNG", "*.png"),
@@ -68,8 +89,63 @@ public class BTab extends Tab{
             else
                 BestPaint.removeCurrentTab();
         });
+        this.scroll.setFitToWidth(true);
+        this.scroll.setFitToHeight(true);   //use with stackpane in scrollpane; do after SPRINT
         this.scroll.setPrefViewportWidth(this.canvas.getWidth());
         this.scroll.setPrefViewportHeight(this.canvas.getHeight());
+        
+        this.autosaveSecs = 30;
+        this.autosaveTimer = new Timer();
+        this.autosave = new TimerTask(){
+            @Override
+            public void run(){
+                Platform.runLater(new Runnable(){
+                    public void run(){
+                        autosaveImage();
+                        autosaveTimer.schedule(autosave, 0, autosaveSecs*MILS_IN_SECS);
+                    }
+                });
+            }
+        };
+        this.autosaveTimer.schedule(this.autosave, 30000, this.autosaveSecs*MILS_IN_SECS);
+    }
+    /**
+     * Autosaves the image in autosaveBackup to the specified autosave directory
+     */
+    public void autosaveImage(){
+        if(this.unsavedChanges && this.path != null) {
+            this.autosaveBackup = this.canvas.getRegion(0, 0, this.canvas.getWidth(), this.canvas.getHeight()); //snapshot of the current canvas
+            File backupFile = new File(AUTOSAVE_DIR + LocalDate.now() + Instant.now().toEpochMilli() + ".png");
+            try {                           //backup path is just date + time in secs since epoch and then the .png file type
+                backupFile.createNewFile();
+                ImageIO.write(SwingFXUtils.fromFXImage(this.autosaveBackup, null),
+                        "png",
+                        new FileOutputStream(backupFile));
+                System.out.println("Autosaved!");
+            } catch (IOException ex) {
+                Logger.getLogger(BTab.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    /**
+     * Updates the timer on the autosave task which allows user to change interval
+     */
+    public void updateAutosaveTimer(){
+        this.autosaveSecs = CToolBar.getAutosaveTime();
+        this.autosave.cancel();
+        this.autosaveTimer.purge();
+        this.autosave = new TimerTask(){
+            @Override
+            public void run(){
+                Platform.runLater(new Runnable(){
+                    public void run(){
+                        autosaveImage();
+                        autosaveTimer.schedule(autosave, 0, autosaveSecs*MILS_IN_SECS);
+                    }
+                });
+            }
+        };
+        this.autosaveTimer.schedule(this.autosave, 0, this.autosaveSecs*MILS_IN_SECS);
     }
     /**
      * Gets the height of the canvas on the tab
@@ -135,7 +211,7 @@ public class BTab extends Tab{
      * Saves a snapshot of the current canvas to the image specified at the path
      */
     public void saveImage(){
-        WritableImage im = canvas.snapshot(new SnapshotParameters(), null);
+        Image im = this.canvas.getRegion(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
         try{
             if(this.path != null){
                 ImageIO.write(SwingFXUtils.fromFXImage(im, null), "png", this.path);
@@ -240,7 +316,7 @@ public class BTab extends Tab{
     public void updateScale(){  
         this.canvasPane.setScaleX(this.getScale());
         this.canvasPane.setScaleY(this.getScale());
-        this.canvasPane.setPrefSize(this.canvas.getWidth()*this.getScale(), this.canvas.getHeight()*this.getScale());
+        this.canvasPane.setPrefSize(this.canvas.getWidth()*this.getScale()*2, this.canvas.getHeight()*this.getScale()*2);
         CToolBar.setZoomLabel(this.getScale());
     }
     /**
@@ -256,5 +332,13 @@ public class BTab extends Tab{
     public void redo(){
         this.canvas.redo();
         this.setUnsavedChanges(true);
+    }
+    /**
+     * Updates the stacks
+     */
+    public void updateStacks(){
+        this.canvas.updateStacks();
+        this.setUnsavedChanges(true);
+        this.updateTabTitle();
     }
 }

@@ -1,7 +1,19 @@
 BetterPaint
-Version 1.1.0
+Version 1.2.0
 
 #----------------------------------------Release Notes----------------------------------------#
+
+Version 1.2.0 (10/8/21)
+New Features:
+	- Autosave
+		- Specify the time and it autosaves to the /appdata/local/bestpaint/ directory
+	- Unit Testing
+		- Tests some of the functions in the DCanvas class
+Features in-progress:
+	- Infinite Rosasco Mode
+	- Better Rainbow Fun Mode
+
+#---------------------------------------------------------------------------------------------#
 
 Version 1.1.0 (9/31/21)
 New Features:
@@ -9,9 +21,9 @@ New Features:
 		- Many colors on the canvas
 	- Rosasco Mode
 		- Bwaha haha ha
-	- Dog Ate Homework Button
+	- Crash Mode
 		- Saves the file but crashes the program
-Features in progress:
+Features in-progress:
 	- Infinite Rosasco Mode
 
 #---------------------------------------------------------------------------------------------#
@@ -31,7 +43,7 @@ New Features:
 	- Blank starter image
 	- New file
 		- Opens previously mentioned blank starter image
-Features in progress:
+Features in-progress:
 	- Infinite Rosasco Mode
 
 #---------------------------------------------------------------------------------------------#
