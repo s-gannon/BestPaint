@@ -9,6 +9,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.StrokeLineCap;
 
 /**
@@ -201,6 +204,15 @@ public class DCanvas extends Canvas{
         
         this.snapshot(sp, wi);
         return wi;
+    }
+    /**
+     * Fills the entire canvas with a gradient that uses the line and fill color
+     */
+    public void fillGradient(){
+        Stop[] stops = {new Stop(0, CToolBar.getLineColor()), new Stop(1, CToolBar.getFillColor())};
+        LinearGradient lg = new LinearGradient(this.getWidth()/2,0,this.getWidth()/2,this.getHeight(),false,CycleMethod.NO_CYCLE,stops);
+        this.gc.setFill(lg);
+        this.gc.fillRect(0,0,this.getWidth(),this.getHeight());
     }
     /**
      * Clears everything on the canvas

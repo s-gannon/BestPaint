@@ -1,14 +1,13 @@
 package bestpaint;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -27,7 +26,7 @@ import javax.imageio.ImageIO;
 public class BTab extends Tab{
     public Pane canvasPane;   //static
     public final static String AUTOSAVE_DIR = "C:\\Users\\spencer\\AppData\\Local\\bestpaint\\";
-    
+    public final static String LOGS_PATH = "logs.txt";
     
     private final static int MILS_IN_SECS = 1000;
     private static FileChooser chooseFile;
@@ -43,6 +42,8 @@ public class BTab extends Tab{
     private StackPane canvasStack;
     private Timer autosaveTimer;
     private TimerTask autosave;
+    private Timer loggerTimer;
+    private TimerTask logger;
     
     public BTab(){
         super();
@@ -89,10 +90,9 @@ public class BTab extends Tab{
             else
                 BestPaint.removeCurrentTab();
         });
-        this.scroll.setFitToWidth(true);
-        this.scroll.setFitToHeight(true);   //use with stackpane in scrollpane; do after SPRINT
-        this.scroll.setPrefViewportWidth(this.canvas.getWidth());
-        this.scroll.setPrefViewportHeight(this.canvas.getHeight());
+        
+        this.scroll.setPrefViewportWidth(this.canvas.getWidth()/2);
+        this.scroll.setPrefViewportHeight(this.canvas.getHeight()/2);
         
         this.autosaveSecs = 30;
         this.autosaveTimer = new Timer();
@@ -100,6 +100,7 @@ public class BTab extends Tab{
             @Override
             public void run(){
                 Platform.runLater(new Runnable(){
+                    @Override
                     public void run(){
                         autosaveImage();
                         autosaveTimer.schedule(autosave, 0, autosaveSecs*MILS_IN_SECS);
@@ -108,6 +109,35 @@ public class BTab extends Tab{
             }
         };
         this.autosaveTimer.schedule(this.autosave, 30000, this.autosaveSecs*MILS_IN_SECS);
+        
+        this.loggerTimer = new Timer();
+        this.logger = new TimerTask(){
+            @Override
+            public void run(){
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run(){
+                        File loggerFile = new File(LOGS_PATH);
+                        try{
+                            loggerFile.createNewFile();
+                        } catch(Exception ex){
+                            System.out.println(ex);
+                        }
+                        try{
+                            FileWriter fw = new FileWriter(LOGS_PATH, true);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            bw.write(CToolBar.getCurrentTool() + " | " + LocalDate.now() + " | " + LocalTime.now());
+                            bw.newLine();
+                            bw.close();
+                        }
+                        catch(Exception ex){
+                            System.out.println(ex);
+                        }
+                    }
+                });
+            }
+        };
+        this.loggerTimer.scheduleAtFixedRate(this.logger, 5000, 30000);
     }
     /**
      * Autosaves the image in autosaveBackup to the specified autosave directory
@@ -138,6 +168,7 @@ public class BTab extends Tab{
             @Override
             public void run(){
                 Platform.runLater(new Runnable(){
+                    @Override
                     public void run(){
                         autosaveImage();
                         autosaveTimer.schedule(autosave, 0, autosaveSecs*MILS_IN_SECS);
@@ -147,6 +178,11 @@ public class BTab extends Tab{
         };
         this.autosaveTimer.schedule(this.autosave, 0, this.autosaveSecs*MILS_IN_SECS);
     }
+    /**
+     * Gets the BCanvas object associated with this tab
+     * @return A BCanvas instance
+     */
+    public BCanvas getCanvas(){return this.canvas;}
     /**
      * Gets the height of the canvas on the tab
      * @return The height as a double
@@ -184,6 +220,7 @@ public class BTab extends Tab{
     public void setFilePath(File path){this.path = path;}
     /**
      * Updates the title of the tab to reflect unsaved changes
+     * @return Whether or not there are any unsaved changes
      */
     public boolean getUnsavedChanges(){return unsavedChanges;}
     /**

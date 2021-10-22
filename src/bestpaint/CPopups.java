@@ -19,9 +19,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CPopups {
-    public static void createAutosaveWindow(){
-        //To-do: Autosave window code
-    }
     /**
      * Creates a window that takes text from a file and displays it in a
      * nice window

@@ -13,10 +13,10 @@ import javafx.stage.DirectoryChooser;
 
 public class CMenuBar extends MenuBar{
     //made public in case they need to be accessed outside of the menu bar class
-    public final static String REL_NOTES_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\release-notes.txt";
-    public final static String ABOUT_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\about.txt";
-    public final static String HELP_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\help.txt";
-    public final static String CONFIG_PATH = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\config.txt";
+    public final static String REL_NOTES_PATH = "release-notes.txt";
+    public final static String ABOUT_PATH = "about.txt";
+    public final static String HELP_PATH = "help.txt";
+    public final static String CONFIG_PATH = "config.txt";
     
     public CMenuBar(){
         super();

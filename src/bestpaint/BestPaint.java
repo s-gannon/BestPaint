@@ -10,14 +10,14 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 /**
  * @author Spencer Gannon
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class BestPaint extends Application {
     public final static String IMAGE_FOLDER = "C:\\Users\\spencer\\Documents\\College Class Files\\CS-250\\BestPaint\\images\\";
 
     private final static String TITLE = "BestPaint";
-    private final static String VER_NUM = "1.2.0";
-    private final static String SUBTITLE = "Because one refactor just wasn't enough";
+    private final static String VER_NUM = "1.3.0";
+    private final static String SUBTITLE = "The final countdown";
     private final static int WINDOW_LENGTH = 1700;
     private final static int WINDOW_HEIGHT = 1000;
     
@@ -51,6 +51,7 @@ public class BestPaint extends Application {
         tabpane.getTabs().add(new BTab());
         tabpane.getSelectionModel().selectFirst();
         
+        primeStage.setMaximized(true);
         primeStage.setTitle(TITLE + " - " + VER_NUM + " - " + SUBTITLE);
         primeStage.setScene(scene);
         primeStage.show();

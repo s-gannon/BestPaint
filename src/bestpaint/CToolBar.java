@@ -25,7 +25,7 @@ import javafx.scene.paint.Color;
 
 public class CToolBar extends ToolBar{
     private final static String[] DRAW_TOOLS = {
-        "None", "Dropper", "Cut", "Paste", "Eraser", "Text", "Line", "Freehand", "Rectangle", 
+        "None", "Dropper", "Cut", "Copy", "Paste", "Eraser", "Text", "Line", "Freehand", "Rectangle", 
         "Round Rectangle", "Square", "Ellipse", "Circle", "N-gon"};
     private final static Integer[] LINE_WIDTH_VALS = {1,2,5,10,15,20,25,50,100};
     //the buttons/modes
@@ -33,6 +33,7 @@ public class CToolBar extends ToolBar{
     private final Button RNBW_FUN_BUTTON;
     private final Button ROSASCO_BUTTON;
     private final Button KILL_BUTTON;
+    private final Button GRADIENT_BUTTON;
     
     private static ComboBox<String> toolsBox;
     private static ComboBox<Integer> widthsBox;
@@ -60,6 +61,7 @@ public class CToolBar extends ToolBar{
         KILL_BUTTON = new Button("");
         RND_COLOR_BUTTON = new Button("");
         RNBW_FUN_BUTTON = new Button("");
+        GRADIENT_BUTTON = new Button("");
         
         numSides = new TextField("3");
         autosaveTime = new TextField(Integer.toString(usingTime));
@@ -73,9 +75,9 @@ public class CToolBar extends ToolBar{
         
         getItems().addAll(new Label(" Tools: "), toolsBox, numSides, new Separator(),
                 new Label(" Line Color: "), lineColorPicker, new Label(" Fill Color: "),
-                fillColorPicker, RND_COLOR_BUTTON, new Separator(), KILL_BUTTON, RNBW_FUN_BUTTON, ROSASCO_BUTTON, 
-                new Separator(), new Label(" Line Width: "), widthsBox, new Label(" Fill "), setFill, 
-                new Separator(), new Label("Zoom: "), zoomLabel, new Separator(), new Label("Autosave every "), 
+                fillColorPicker, RND_COLOR_BUTTON, GRADIENT_BUTTON, new Separator(), KILL_BUTTON, RNBW_FUN_BUTTON, 
+                ROSASCO_BUTTON, new Separator(), new Label(" Line Width: "), widthsBox, new Label(" Fill "), 
+                setFill, new Separator(), new Label("Zoom: "), zoomLabel, new Separator(), new Label("Autosave every "), 
                 autosaveTime, new Label(" seconds"));   
         
         //setting the default values for all of the things that look bad w/o them
@@ -97,7 +99,7 @@ public class CToolBar extends ToolBar{
         KILL_BUTTON.setTooltip(new Tooltip("Crash"));
         RND_COLOR_BUTTON.setTooltip(new Tooltip("Random Fill and Line Color"));
         RNBW_FUN_BUTTON.setTooltip(new Tooltip("Rainbow Fun Mode"));
-        
+        GRADIENT_BUTTON.setTooltip(new Tooltip("Gradient Fill Mode"));
         
         try {
             //setting graphics on buttons
@@ -107,6 +109,7 @@ public class CToolBar extends ToolBar{
             KILL_BUTTON.setGraphic(new ImageView(new Image(new FileInputStream(BestPaint.IMAGE_FOLDER + "icons\\crash.png"), size, size, true, true)));
             RND_COLOR_BUTTON.setGraphic(new ImageView(new Image(new FileInputStream(BestPaint.IMAGE_FOLDER + "icons\\random.png"), size, size, true, true)));
             RNBW_FUN_BUTTON.setGraphic(new ImageView(new Image(new FileInputStream(BestPaint.IMAGE_FOLDER + "icons\\rainbow.png"), size, size, true, true)));
+            GRADIENT_BUTTON.setGraphic(new ImageView(new Image(new FileInputStream(BestPaint.IMAGE_FOLDER + "icons\\gradient.png"), size, size, true, true)));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CToolBar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -121,14 +124,27 @@ public class CToolBar extends ToolBar{
         });     //changes the index of the tool being used to whatever was selected
         widthsBox.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if(!isNowFocused){
-                widthsBox.setValue(Integer.parseInt(widthsBox.getEditor().getText()));
+                if(Integer.parseInt(widthsBox.getEditor().getText()) >= 1){
+                    widthsBox.setValue(Integer.parseInt(widthsBox.getEditor().getText()));
+                }
+                else{
+                    widthsBox.setValue(1);
+                }
             }   //listens to the ComboBox TextInput; if it changes it sets the value to whatever was input
         });
         numSides.textProperty().addListener((observable, value, newValue) -> {
-            usingNumSides = Integer.parseInt(newValue);
+            if(Integer.parseInt(newValue) >= 3)
+                usingNumSides = Integer.parseInt(newValue);
+            else{
+                numSides.setText("3");
+            }
         });     //listens and returns num of sides to use in ngon
         autosaveTime.textProperty().addListener((observable, value, newValue) -> {
-            usingTime = Integer.parseInt(newValue);
+            if(Integer.parseInt(newValue) >= 1)
+                usingTime = Integer.parseInt(newValue);
+            else{
+                autosaveTime.setText("1");
+            }
             BestPaint.getCurrentTab().updateAutosaveTimer();
         });     //listens and returns time
         
@@ -179,6 +195,10 @@ public class CToolBar extends ToolBar{
             for(;true;){    //cursed
                 System.out.println("Buckle up motherfuckers, it's time to Crash");
             }
+        });
+        GRADIENT_BUTTON.setOnAction((ActionEvent e) -> {
+            BestPaint.getCurrentTab().getCanvas().fillGradient();
+            BestPaint.getCurrentTab().updateStacks();
         });
     }
     /**

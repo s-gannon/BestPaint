@@ -69,9 +69,16 @@ public class BCanvas extends DCanvas{
                     this.updateStacks();
                     break;
                 case("Cut"):
-                    this.setLineWidth(1);
-                    this.setFillShape(true);
-                    this.setLineColor(this.getFillColor());
+                    this.setLineWidth(2);
+                    this.setFillShape(false);
+                    this.setLineColor(Color.BLACK);
+                    this.drawRect(x,y,x,y);
+                    this.updateStacks();
+                    break;
+                case("Copy"):
+                    this.setLineWidth(2);
+                    this.setFillShape(false);
+                    this.setLineColor(Color.BLACK);
                     this.drawRect(x,y,x,y);
                     this.updateStacks();
                     break;
@@ -154,6 +161,11 @@ public class BCanvas extends DCanvas{
                     this.drawRect(x, y, e.getX(), e.getY());
                     this.updateStacks();
                     break;
+                case("Copy"):
+                    this.undo();
+                    this.drawRect(x, y, e.getX(), e.getY());
+                    this.updateStacks();
+                    break;
                 case("Paste"):
                     this.undo();
                     try{
@@ -222,7 +234,16 @@ public class BCanvas extends DCanvas{
                 case("Cut"):
                     this.undo();
                     this.clipboard = this.getRegion(x, y, e.getX(), e.getY());
+                    this.setLineWidth(1);
+                    this.setFillShape(true);
+                    this.setLineColor(CToolBar.getFillColor());
                     this.drawRect(x, y, e.getX(), e.getY());
+                    this.updateStacks();
+                    BestPaint.getCurrentTab().setUnsavedChanges(true);
+                    break;
+                case("Copy"):
+                    this.undo();
+                    this.clipboard = this.getRegion(x, y, e.getX(), e.getY());
                     this.updateStacks();
                     BestPaint.getCurrentTab().setUnsavedChanges(true);
                     break;

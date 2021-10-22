@@ -1,7 +1,25 @@
 BetterPaint
-Version 1.2.0
+Version 1.3.0
 
 #----------------------------------------Release Notes----------------------------------------#
+
+Version 1.3.0 (10/18/21)
+New Features:
+	- Logging
+		- We now log what tools you are using in a text file to collect data
+			- We promise we will use it responsibly
+	- Linear Gradient
+		- Uses the line color and fill color to create a linear gradient across
+		  the canvas
+	- Copy
+		- Copies a section and allows it to be pasted using the paste tool
+	- Polish!
+		- Checks input boxes for illegal/bad input before attempting to use
+		  the data
+Features in-progress:
+	- Infinite Rosasco Mode
+
+#---------------------------------------------------------------------------------------------#
 
 Version 1.2.0 (10/8/21)
 New Features:
@@ -105,14 +123,12 @@ New Features:
 	- Paint Tools
 		- Sits right under the Menu Bar; all of the tools you'll need to paint 
 		  things
-
 Features in-progress:
 	- Random color
 		- Gives the user a random color at the click of a button
 	- Rainbow Fun Mode
 	- More Tabs
 	- "Don't show me the release notes again" checkbox
-
 Bugs:
 	- Closing the tab is not good and requires a reboot
 
@@ -126,7 +142,6 @@ New Features:
 	- Safe exit
 		- We'll ask if you're sure about exiting so that you don't exit if you 
 		  didn't *really* want to
-
 Features in-progress:
 	- "I'm feeling lucky"
 		- Choose a folder (with at least 1 image) and it will randomly choose an
@@ -134,7 +149,6 @@ Features in-progress:
 	- Rainbow fun mode (you'll see)
 	- The "Don't show me the release notes ever again" checkbox
 		- We know you hate that little window opening
-
 Bugs:
 	- Cannot get the release notes to re-open after closing them on start and hitting 
 	  "Release" button
