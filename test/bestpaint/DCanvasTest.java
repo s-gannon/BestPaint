@@ -35,49 +35,49 @@ public class DCanvasTest {
     }
     
     /**
-     * Test of setFillShape method, of class DCanvas.
+     * Test of setFillShape method, of class DrawCanvas.
      */
     @Test
     public void testSetFillShape(){
         boolean fillShape = false;
         System.out.println("setFillShape");
-        DCanvas instance = new DCanvas();
+        DrawCanvas instance = new DrawCanvas();
         instance.setFillShape(fillShape);
         assertEquals(fillShape,instance.getFillShape());//if getFillShape returns value defined above, we good
     }
 
     /**
-     * Test of setLineColor method, of class DCanvas.
+     * Test of setLineColor method, of class DrawCanvas.
      */
     @Test
     public void testSetLineColor() {
         System.out.println("setLineColor");
         Color color = Color.MAROON;
-        DCanvas instance = new DCanvas();
+        DrawCanvas instance = new DrawCanvas();
         instance.setLineColor(color);
         assertEquals(color, instance.getLineColor());   //if getLineColor returns value defined above, we good
     }
 
     /**
-     * Test of setFillColor method, of class DCanvas.
+     * Test of setFillColor method, of class DrawCanvas.
      */
     @Test
     public void testSetFillColor() {
         System.out.println("setFillColor");
         Color color = Color.CHARTREUSE;
-        DCanvas instance = new DCanvas();
+        DrawCanvas instance = new DrawCanvas();
         instance.setFillColor(color);
         assertEquals(color, instance.getFillColor());   //if getLineColor returns value defined above, we good
     }
 
     /**
-     * Test of setLineWidth method, of class DCanvas.
+     * Test of setLineWidth method, of class DrawCanvas.
      */
     @Test
     public void testSetLineWidth() {
         System.out.println("setLineWidth");
         double width = 10.0;
-        DCanvas instance = new DCanvas();
+        DrawCanvas instance = new DrawCanvas();
         instance.setLineWidth(width);
         //had to add a third param delta
         assertEquals(10.0,instance.getLineWidth(),0.1); //if getLineWidth returns value defined above, we good

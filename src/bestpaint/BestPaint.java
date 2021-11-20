@@ -25,8 +25,8 @@ public class BestPaint extends Application {
     //major window elements made public and static to access outside of main
     public static Stage mainStage;
     public static TabPane tabpane;
-    public static CToolBar toolbar;
-    public static CMenuBar menubar;
+    public static CleanToolBar toolbar;
+    public static CleanMenuBar menubar;
     public static Timeline autosave;
     
     @Override
@@ -34,21 +34,21 @@ public class BestPaint extends Application {
         BestPaint.mainStage = primeStage;   //associates the stage being shown with the public mainStage
         //layout objects
         tabpane = new TabPane();
-        toolbar = new CToolBar();
-        menubar = new CMenuBar();
+        toolbar = new CleanToolBar();
+        menubar = new CleanMenuBar();
         BorderPane bp = new BorderPane();
         VBox topbars = new VBox(menubar, toolbar);
         Scene scene = new Scene(bp, WINDOW_LENGTH, WINDOW_HEIGHT);
         
         mainStage.setOnCloseRequest((WindowEvent w) -> {
             w.consume();
-            CPopups.createExitAlert(mainStage);
+            Popups.createExitAlert(mainStage);
         });
         //Setting up layout
         bp.setTop(topbars);
         bp.setCenter(tabpane);
         
-        tabpane.getTabs().add(new BTab());
+        tabpane.getTabs().add(new BestTab());
         tabpane.getSelectionModel().selectFirst();
         
         primeStage.setMaximized(true);
@@ -65,9 +65,9 @@ public class BestPaint extends Application {
     }
     /**
      * Gets the current tab in use
-     * @return The BTab object currently selected
+     * @return The BestTab object currently selected
      */
-    public static BTab getCurrentTab(){return (BTab)tabpane.getSelectionModel().getSelectedItem();}
+    public static BestTab getCurrentTab(){return (BestTab)tabpane.getSelectionModel().getSelectedItem();}
     /**
      * Removes the current tab in use
      */
