@@ -1,9 +1,9 @@
 # BestPaint
-CS-250 Paint Project ; The BestPaint program
+A CS-250 Paint Project. The BestPaint program.
 
 Uses JDK 1.8 (which includes the JavaFX library)
 
-### UML Diagrams (may or may not clarify certain aspects of the program)
+### UML Diagrams
 
 ![image](https://user-images.githubusercontent.com/71360107/142713686-49b2f3da-4472-4a97-aea7-e3692fec4df7.png)
 
